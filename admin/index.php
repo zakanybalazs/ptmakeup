@@ -66,6 +66,40 @@ $server = mysqli_connect($hostDB,$userDB,$passDB,$tableDB);
     <input type="file" id="new_photo" onchange="hh()">
   </div>
 
+  <style>
+      .tooltip .tooltiptext {
+          visibility: hidden;
+          width: 120px;
+          background-color: #555;
+          color: #fff;
+          text-align: center;
+          border-radius: 6px;
+          padding: 5px 0;
+          position: absolute;
+          z-index: 1;
+          bottom: 125%;
+          left: 50%;
+          margin-left: -60px;
+          opacity: 0;
+          transition: opacity 1s;
+      }
+
+      .tooltip .tooltiptext::after {
+          content: "";
+          position: absolute;
+          top: 100%;
+          left: 50%;
+          margin-left: -5px;
+          border-width: 5px;
+          border-style: solid;
+          border-color: #555 transparent transparent transparent;
+      }
+
+      .tooltip:hover .tooltiptext {
+          visibility: visible;
+          opacity: 1;
+      }
+  </style>
     <script type="text/javascript">
     $(document).ready(function() {
       $('#photo_details').hide();
@@ -87,9 +121,15 @@ $server = mysqli_connect($hostDB,$userDB,$passDB,$tableDB);
       <div class="col-lg-8 col-md-8">
 
         <label>Kategória leírás</label>
-        <textarea id="cat_leiras" class="form-control" rows="8" cols="80"></textarea>
+        <textarea id="cat_leiras" data-toggle="tooltip" title="Méretezhető vagyok!" class="form-control" rows="1" cols="80"></textarea>
       </div>
+      <script>
+$(document).ready(function(){
+    $('[data-toggle="tooltip"]').tooltip();
+});
+</script>
       <div class="col-lg-12">
+        <p></p>
           <button type="button" class="btn btn-success" name="button" onclick="new_cat()"><i class="fa fa-floppy-o" aria-hidden="true"></i> Mentés</button>
           <script type="text/javascript">
             function new_cat() {
