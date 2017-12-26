@@ -66,6 +66,32 @@ $server = mysqli_connect($hostDB,$userDB,$passDB,$tableDB);
     <input type="file" id="new_photo" onchange="hh()">
   </div>
 
+<script type="text/javascript">
+
+$.post("../ajax/ajax.get_next_id.php", {
+  bla: 'Kincsi'
+},
+"json").done(function( response ) {
+  if (response != "error") {
+    var id = response;
+  }
+});
+
+// init fortm data
+var KepFile = new FormData();
+
+// creating path
+var kephely = "../asstets/uploads/kepek/" + id + " " +  name + " " + cat + ".jpg";
+
+// Kép hozzáadás a form data-hoz
+KepFile.append('kep', $('#file-1').prop('files')[0]);
+KepFile.append('nev', kephely);
+
+</script>
+
+
+
+
   <style>
       .tooltip .tooltiptext {
           visibility: hidden;
