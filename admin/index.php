@@ -66,6 +66,7 @@ $server = mysqli_connect($hostDB,$userDB,$passDB,$tableDB);
     <input type="file" id="new_photo" onchange="hh()">
   </div>
 
+
 <script type="text/javascript">
 function feltolt() {
   var cat = $('#photo_cat option:selected').html();
@@ -104,7 +105,7 @@ function feltolt() {
         });
         new PNotify({
           title: 'Siker',
-          text: 'Sikeresen rögzíte!',
+          text: 'Sikeresen rögzítve!',
           animate: { animate: true, in_class: 'bounceInLeft',
           out_class: 'bounceOutRight',},
           type: "success",
@@ -224,7 +225,7 @@ $(document).ready(function(){
              <tr id="tr_<?php echo $swa['cat_id'] ?>">
                <td><?php echo $swa['name'] ?></td>
                <td><?php echo $swa['leiras'] ?></td>
-               <td><button type="button" class="btn btn-danger form-control" name="button" onclick="torol('<?php echo $id ?>')">törlés</button></td>
+               <td><button type="button" class="btn btn-danger form-control" name="button" onclick="torol('<?php echo $id ?>')"><i class="fa fa-trash" aria-hidden="true"></i> Törlés</button></td>
              </tr>
             <?php } ?>
           </tbody>
