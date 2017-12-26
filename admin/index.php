@@ -57,7 +57,7 @@ $server = mysqli_connect($hostDB,$userDB,$passDB,$tableDB);
           <?php } ?>
         </select>
         <p></p>
-        <button type="button" class="btn btn-success" name="button">feltöltés</button>
+        <button type="button" class="btn btn-success" name="button" onclick="feltolt()">feltöltés</button>
       </div>
     </div>
 
@@ -67,26 +67,51 @@ $server = mysqli_connect($hostDB,$userDB,$passDB,$tableDB);
   </div>
 
 <script type="text/javascript">
+function feltolt() {
+  var cat = $('#photo_cat option:selected').html();
+  var name = $('#photo_name').val();
+  var leiras = $('#photo_leiras').val();
+    $.post("../ajax/ajax.get_next_id.php", {
+      table: 'photo',
+      id_type: 'photo_id'
+      },
+      "json").done(function( response ) {
+        if (response != "error") {
+          console.log(response);
+          var id = response[0];
+        }
 
-$.post("../ajax/ajax.get_next_id.php", {
-  bla: 'Kincsi'
-},
-"json").done(function( response ) {
-  if (response != "error") {
-    var id = response;
-  }
-});
+        // init fortm data
+        var KepFile = new FormData();
 
-// init fortm data
-var KepFile = new FormData();
+        // creating path
+        var kephely = "assets/uploads/kepek/" + id + "_" +  name + "_" + cat + ".jpg";
 
-// creating path
-var kephely = "../asstets/uploads/kepek/" + id + " " +  name + " " + cat + ".jpg";
-
-// Kép hozzáadás a form data-hoz
-KepFile.append('kep', $('#file-1').prop('files')[0]);
-KepFile.append('nev', kephely);
-
+        // Kép hozzáadás a form data-hoz
+        KepFile.append('kep', $('#new_photo').prop('files')[0]); //
+        KepFile.append('path', kephely); //
+        KepFile.append('name', name);
+        KepFile.append('cat', cat);
+        KepFile.append('leiras', leiras);
+        $.ajax({
+          type: 'POST',
+          processData: false,
+          contentType: false,
+          cache: false,
+          data: KepFile,
+          url: "../ajax/ajax.kep_feltoltes.php",
+          dataType: 'json',
+        });
+        new PNotify({
+          title: 'Siker',
+          text: 'Sikeresen rögzíte!',
+          animate: { animate: true, in_class: 'bounceInLeft',
+          out_class: 'bounceOutRight',},
+          type: "success",
+          hide: true,
+        });
+      });
+}
 </script>
 
 
