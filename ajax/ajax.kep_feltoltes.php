@@ -12,10 +12,14 @@ $q = "INSERT INTO photo (name, leiras, pat, cat) VALUES ('{$name}', '{$leiras}',
  $sq = mysqli_query($server,$q);
  $json  = array();
  if ($sq) {
-$json = array('ok');
 
+$dir = getcwd();
+$dir2 = explode('ajax',$dir);
+$pat = $dir2[0].$pat;
+$json = array("ok");
 // kép feltöltése a szerverre
-$pat = "c:/xampp/htdocs/ptmakeup/".$pat;
+// $pat = "c:/xampp/htdocs/ptmakeup/".$pat;
+ chmod($_FILES['kep']['tmp_name'], 0755);
 rename($_FILES['kep']['tmp_name'],$pat);
 
 

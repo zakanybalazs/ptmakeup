@@ -65,7 +65,34 @@ $server = mysqli_connect($hostDB,$userDB,$passDB,$tableDB);
     <h3>Új kép feltöltése:</h3>
     <input type="file" id="new_photo" onchange="hh()">
   </div>
-
+  <table class="table table-stripped table-hover">
+    <thead>
+      <th>Név</th>
+      <th>Kategória</th>
+      <th>Megtekint</th>
+      <th>Szerkeszt</th>
+      <th>Töröl</th>
+    </thead>
+    <tbody>
+      <?php
+      $w = "SELECT * FROM photo";
+      $sw = mysqli_query($server, $w);
+      while ($swa = mysqli_fetch_assoc($sw)) {
+        $name = $swa['name'];
+        $photo_id = $swa['photo_id'];
+        $cat = $swa['cat'];
+        $pat = $swa['pat'];
+        ?>
+        <tr>
+          <td><?php echo $name; ?></td>
+          <td><?php echo $cat; ?></td>
+          <td><a class="btn btn-default" target="_blank" href="../<?php echo $pat; ?>">Megtekint</a></td>
+          <td><button type="button" onclick="edit('<?php echo $photo_id; ?>','<?php echo $name; ?>','<?php echo $cat; ?>')" class="btn btn-warning">Szerkeszt</button></td>
+          <td><button type="button" onclick="torol('<?php echo $photo_id; ?>','photo','photo_id')" class="btn btn-danger"><i class="fa fa-trash" aria-hidden="true"></i> Törlés</button></td>
+        </tr>
+      <?php } ?>
+    </tbody>
+  </table>
 
 <script type="text/javascript">
 function feltolt() {
@@ -86,7 +113,7 @@ function feltolt() {
         var KepFile = new FormData();
 
         // creating path
-        var kephely = "assets/uploads/kepek/" + id + "_" +  name + "_" + cat + ".jpg";
+        var kephely = "assets/uploads/kepek/" + id + ".jpg";
 
         // Kép hozzáadás a form data-hoz
         KepFile.append('kep', $('#new_photo').prop('files')[0]); //
@@ -175,15 +202,14 @@ function feltolt() {
         <label>Kategória leírás</label>
         <textarea id="cat_leiras" data-toggle="tooltip" title="Méretezhető vagyok!" class="form-control" rows="1" cols="80"></textarea>
       </div>
-      <script>
-$(document).ready(function(){
-    $('[data-toggle="tooltip"]').tooltip();
-});
-</script>
       <div class="col-lg-12">
         <p></p>
           <button type="button" class="btn btn-success" name="button" onclick="new_cat()"><i class="fa fa-floppy-o" aria-hidden="true"></i> Mentés</button>
           <script type="text/javascript">
+          $(document).ready(function(){
+              $('[data-toggle="tooltip"]').tooltip();
+          });
+
             function new_cat() {
               var cat_name = $('#cat_name').val();
               var cat_leiras = $('#cat_leiras').val();
@@ -225,17 +251,16 @@ $(document).ready(function(){
              <tr id="tr_<?php echo $swa['cat_id'] ?>">
                <td><?php echo $swa['name'] ?></td>
                <td><?php echo $swa['leiras'] ?></td>
-               <td><button type="button" class="btn btn-danger form-control" name="button" onclick="torol('<?php echo $id ?>')"><i class="fa fa-trash" aria-hidden="true"></i> Törlés</button></td>
+               <td><button type="button" class="btn btn-danger form-control" name="button" onclick="torol('<?php echo $id ?>','categories','cat_id')"><i class="fa fa-trash" aria-hidden="true"></i> Törlés</button></td>
              </tr>
             <?php } ?>
           </tbody>
         </table>
         <script type="text/javascript">
-          function torol(id) {
-            alert('torlés');
+          function torol(id,table,id_name) {
             $.post("../ajax/ajax.delete.php", {
-                table: 'categories',
-                id_name: 'cat_id',
+                table: table,
+                id_name: id_name,
                 id: id
               },
               "json").done(function( response ) {
