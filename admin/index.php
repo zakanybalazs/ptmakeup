@@ -11,7 +11,7 @@ $server = mysqli_connect($hostDB,$userDB,$passDB,$tableDB);
 
     <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
 
-    <title>PTMakeup</title>
+    <title>TPMakeup</title>
 
     <!-- Bootstrap Core CSS -->
     <link href="../vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -65,10 +65,11 @@ $server = mysqli_connect($hostDB,$userDB,$passDB,$tableDB);
     <h3>Új kép feltöltése:</h3>
     <input type="file" id="new_photo" onchange="hh()">
   </div>
-  <table class="table table-stripped table-hover">
+  <table class="table table-striped table-hover">
     <thead>
       <th>Név</th>
       <th>Kategória</th>
+      <th>Leírás</th>
       <th>Megtekint</th>
       <th>Szerkeszt</th>
       <th>Töröl</th>
@@ -82,19 +83,82 @@ $server = mysqli_connect($hostDB,$userDB,$passDB,$tableDB);
         $photo_id = $swa['photo_id'];
         $cat = $swa['cat'];
         $pat = $swa['pat'];
+        $leiras = $swa['leiras'];
         ?>
-        <tr>
-          <td><?php echo $name; ?></td>
-          <td><?php echo $cat; ?></td>
-          <td><a class="btn btn-default" target="_blank" href="../<?php echo $pat; ?>">Megtekint</a></td>
-          <td><button type="button" onclick="edit('<?php echo $photo_id; ?>','<?php echo $name; ?>','<?php echo $cat; ?>')" class="btn btn-warning">Szerkeszt</button></td>
-          <td><button type="button" onclick="torol('<?php echo $photo_id; ?>','photo','photo_id')" class="btn btn-danger"><i class="fa fa-trash" aria-hidden="true"></i> Törlés</button></td>
+        <tr id="photo_<?php echo $photo_id; ?>">
+          <td class="name"><?php echo $name; ?></td>
+          <td class="cat"><?php echo $cat; ?></td>
+          <td class="leiras" align="center"><?php echo $leiras; ?></td>
+          <td><a class="btn btn-primary" target="_blank" href="../<?php echo $pat; ?>"><i class="fa fa-eye" aria-hidden="true"></a></td>
+          <td><button type="button" onclick="edit('photo','<?php echo $photo_id; ?>')" class="btn btn-warning"><i class="fa fa-pencil" aria-hidden="true"></button></td>
+          <td><button type="button" onclick="torol('<?php echo $photo_id; ?>','photo','photo_id')" class="btn btn-danger"><i class="fa fa-trash" aria-hidden="true"></i></button></td>
         </tr>
       <?php } ?>
     </tbody>
   </table>
 
 <script type="text/javascript">
+function edit(div, id) {
+  console.log("prepearing to save");
+    var name = $('#'+div+"_"+id).children(".name").attr('contenteditable','true');
+    var leiras = $('#'+div+"_"+id).children(".leiras").attr('contenteditable','true');
+    if (div == 'photo') {
+      var cat = $('#'+div+"_"+id).children(".cat").attr('contenteditable','true');
+    }
+    var bt = "<td class='save'><button type='button' class='btn btn-success' onclick=save('"+div+"','"+id+"')><i class='fa fa-floppy-o' aria-hidden='true'></button></td>";
+    $('#'+div+"_"+id).append(bt);
+}
+function save(div, id) {
+  console.log("fetching data...");
+  var tr = '#'+div+"_"+id;
+  var name = $(tr).children(".name").html();
+  var leiras = $(tr).children(".leiras").html();
+  if (div == "photo") {
+    var cat = $(tr).children(".cat").html();
+    arr = new Array({'name': name, 'leiras': leiras, 'cat': cat});
+  } else {
+    arr = new Array({'name': name, 'leiras':leiras});
+
+  }
+  console.log(arr[0]);
+  console.log("saving...");
+        $.post("../ajax/ajax.update.php", {
+              div: div,
+              id: id,
+              data: arr
+                },
+                "json").done(function( response ) {
+                  if (response == "ok") {
+                    new PNotify({
+                      title: 'Siker',
+                      text: 'Sikeresen szerkesztve!',
+                      animate: { animate: true, in_class: 'bounceInLeft',
+                      out_class: 'bounceOutRight',},
+                      type: "success",
+                      hide: true,
+                    });
+                    console.log('saved');
+                    $(tr).children(".save").attr("hidden","hidden");
+                    $(tr).children(".name").attr('contenteditable','false');
+                    $(tr).children(".leiras").attr('contenteditable','false');
+                    if (div == 'photo') {
+                      $(tr).children(".cat").attr('contenteditable','false');
+                    }
+                  } else {
+              new PNotify({
+                title: 'Sikertelen szerkesztés',
+                text: 'Sikertelen volt a szerkesztés! Hiba: '+response,
+                animate: { animate: true, in_class: 'bounceInLeft',
+                out_class: 'bounceOutRight',},
+                type: "error",
+                hide: true,
+              });
+            }
+
+          });
+
+}
+
 function feltolt() {
   var cat = $('#photo_cat option:selected').html();
   var name = $('#photo_name').val();
@@ -132,7 +196,7 @@ function feltolt() {
         });
         new PNotify({
           title: 'Siker',
-          text: 'Sikeresen rögzítve!',
+          text: 'Sikeresen rögzítve! Frissíts a változtatások mutatásához.',
           animate: { animate: true, in_class: 'bounceInLeft',
           out_class: 'bounceOutRight',},
           type: "success",
@@ -222,7 +286,7 @@ function feltolt() {
                   if (response == "ok") {
                     new PNotify({
                       title: 'Siker',
-                      text: 'Sikeresen megtörtént a feltöltés!',
+                      text: 'Sikeresen megtörtént a feltöltés!  Frissíts a változtatások mutatásához.',
                       animate: { animate: true, in_class: 'bounceInLeft',
                       out_class: 'bounceOutRight',},
                       type: "success",
@@ -235,7 +299,7 @@ function feltolt() {
       </div>
       <div class="col-lg-12">
         <h3>Kategóriák:</h3>
-        <table class="table table-stripped table-hover">
+        <table class="table table-striped table-hover">
           <thead>
             <th>Név</th>
             <th>Leírás</th>
@@ -248,10 +312,11 @@ function feltolt() {
             while ($swa = mysqli_fetch_assoc($sw)) {
               $id = $swa['cat_id'];
              ?>
-             <tr id="tr_<?php echo $swa['cat_id'] ?>">
-               <td><?php echo $swa['name'] ?></td>
-               <td><?php echo $swa['leiras'] ?></td>
-               <td><button type="button" class="btn btn-danger form-control" name="button" onclick="torol('<?php echo $id ?>','categories','cat_id')"><i class="fa fa-trash" aria-hidden="true"></i> Törlés</button></td>
+             <tr id="cat_<?php echo $swa['cat_id'] ?>">
+               <td class="name"><?php echo $swa['name'] ?></td>
+               <td class="leiras" align="center"><?php echo $swa['leiras'] ?></td>
+               <td><button type="button" class="btn btn-warning" name="button" onclick="edit('cat','<?php echo $id ?>')"><i class="fa fa-pencil" aria-hidden="true"></i> Szerkeszt</button>
+                   <button type="button" class="btn btn-danger" name="button" onclick="torol('<?php echo $id ?>','categories','cat_id')"><i class="fa fa-trash" aria-hidden="true"></i> Törlés</button></td>
              </tr>
             <?php } ?>
           </tbody>
@@ -267,13 +332,12 @@ function feltolt() {
                 if (response == "ok") {
                   new PNotify({
                     title: 'Siker',
-                    text: 'Sikeresen Töröltem!',
+                    text: 'Sikeresen Töröltem! Frissíts a változtatások mutatásához.',
                     animate: { animate: true, in_class: 'bounceInLeft',
                     out_class: 'bounceOutRight',},
                     type: "success",
                     hide: true,
                   });
-                  $("#tr_"+id).slideUp(1200);
                 } else {
             new PNotify({
               title: 'Sikertelen tölrés',

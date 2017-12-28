@@ -1,7 +1,7 @@
 <?php
 require_once '../config/db.php';
 $server = mysqli_connect($hostDB,$userDB,$passDB,$tableDB);
-$table = 'vendegek';
+$table = $_POST['table'];
 $id = $_POST['id'];
 $name = $_POST['name'];
 $value = $_POST['value'];
