@@ -1,3 +1,7 @@
+<?php
+require_once 'config/db.php';
+$server = mysqli_connect($hostDB,$userDB,$passDB,$tableDB);
+ ?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -8,7 +12,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Stylish Portfolio - Start Bootstrap Template</title>
+    <title>TP Makeup</title>
 
     <!-- Bootstrap Core CSS -->
     <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -17,10 +21,17 @@
     <link href="vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
     <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700,300italic,400italic,700italic" rel="stylesheet" type="text/css">
     <link href="vendor/simple-line-icons/css/simple-line-icons.css" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+
 
     <!-- Custom CSS -->
-    <link href="css/stylish-portfolio.min.css" rel="stylesheet">
+    <link href="css/stylish-portfolio.css" rel="stylesheet">
+    <style media="screen">
+      .sdw {
+         text-shadow: 2px 2px 4px #000000;
+      }
 
+    </style>
   </head>
 
   <body id="page-top">
@@ -30,14 +41,11 @@
     </a>
     <nav id="sidebar-wrapper">
       <ul class="sidebar-nav">
-        <li class="sidebar-brand">
-          <a class="js-scroll-trigger" href="#page-top">Start Bootstrap</a>
+        <li class="sidebar-nav-item">
+          <a class="js-scroll-trigger" href="#page-top">Kezdőlap</a>
         </li>
         <li class="sidebar-nav-item">
-          <a class="js-scroll-trigger" href="#page-top">Home</a>
-        </li>
-        <li class="sidebar-nav-item">
-          <a class="js-scroll-trigger" href="#about">About</a>
+          <a class="js-scroll-trigger" href="#gallery">Gelléria</a>
         </li>
         <li class="sidebar-nav-item">
           <a class="js-scroll-trigger" href="#services">Services</a>
@@ -54,25 +62,54 @@
     <!-- Header -->
     <header class="masthead d-flex">
       <div class="container text-center my-auto">
-        <h1 class="mb-1">Stylish Portfolio</h1>
-        <h3 class="mb-5">
-          <em>A Free Bootstrap Theme by Start Bootstrap</em>
+        <style media="screen">
+          .wh {
+            color: #fff;
+          }
+        </style>
+        <h1 class="mb-1 wh sdw">PT Makeup</h1>
+        <h3 class="mb-5 wh">
+          <em class="sdw">Because we actually know how to do stuff</em>
         </h3>
-        <a class="btn btn-primary btn-xl js-scroll-trigger" href="#about">Find Out More</a>
+        <a class="btn btn-primary btn-xl js-scroll-trigger" href="#gallery">Nézd meg mit tudunk!</a>
       </div>
       <div class="overlay"></div>
     </header>
 
     <!-- About -->
-    <section class="content-section bg-light" id="about">
+    <section class="content-section bg-light" id="gallery">
       <div class="container text-center">
         <div class="row">
-          <div class="col-lg-10 mx-auto">
-            <h2>Stylish Portfolio is the perfect theme for your next project!</h2>
-            <p class="lead mb-5">This theme features a flexible, UX friendly sidebar menu and stock photos from our friends at
-              <a href="https://unsplash.com/">Unsplash</a>!</p>
-            <a class="btn btn-dark btn-xl js-scroll-trigger" href="#services">What We Offer</a>
+          <div class="col-lg-10 mx-auto" id="color_btn">
+            <h2>Nézd meg a kategóriák közül ami tetszik!</h2>
+            <p></p>
+            <?php
+            $q = "SELECT * FROM categories";
+            $sq = mysqli_query($server, $q);
+            while ($sqa = mysqli_fetch_assoc($sq)) {
+              $id = $sqa['cat_id'];
+             ?>
+            <a class="btn btn-dark btn-xl" href="galeries.php?cat=<?php echo $id ?>"><span class="sdw"><?php echo $sqa['name'] ?></span></a>
+          <?php } ?>
           </div>
+          <script type="text/javascript">
+            $(document).ready(function() {
+              $('#color_btn').children('a').each(function () {
+                var color = getRandomColor();
+                $(this).css('background-color',color);
+                $(this).css('border-color',color);
+                $(this).css('box-shadow',"0 8px 6px -6px black");
+              });
+            });
+            function getRandomColor() {
+                var letters = '0123456789ABCDEF';
+                var color = '#';
+                for (var i = 0; i < 6; i++) {
+                  color += letters[Math.floor(Math.random() * 16)];
+                }
+                return color;
+              }
+          </script>
         </div>
       </div>
     </section>
@@ -127,15 +164,6 @@
       </div>
     </section>
 
-    <!-- Callout -->
-    <section class="callout">
-      <div class="container text-center">
-        <h2 class="mx-auto mb-5">Welcome to
-          <em>your</em>
-          next website!</h2>
-        <a class="btn btn-primary btn-xl" href="https://startbootstrap.com/template-overviews/stylish-portfolio/">Download Now!</a>
-      </div>
-    </section>
 
     <!-- Portfolio -->
     <section class="content-section" id="portfolio">
