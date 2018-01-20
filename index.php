@@ -24,21 +24,12 @@ $server = mysqli_connect($hostDB,$userDB,$passDB,$tableDB);
     <link rel="shortcut icon" type="image/x-icon" href="assets/uploads/tp_icon.png" />
     <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 
-    <!-- Bootstrap core JavaScript -->
-    <script src="vendor/jquery/jquery.min.js"></script>
-    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-
-    <!-- Plugin JavaScript -->
-    <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
-
-    <!-- Custom scripts for this template -->
-    <script src="js/stylish-portfolio.min.js"></script>
-
-
     <script src="btn_ready.js" charset="utf-8"></script>
 
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/ekko-lightbox/5.2.0/ekko-lightbox.min.js" charset="utf-8"></script>
+
+
 
 
     <!-- Custom CSS -->
@@ -65,13 +56,10 @@ $server = mysqli_connect($hostDB,$userDB,$passDB,$tableDB);
           <a class="js-scroll-trigger" href="#gallery">Gelléria</a>
         </li>
         <li class="sidebar-nav-item">
-          <a class="js-scroll-trigger" href="#services">Services</a>
+          <a class="js-scroll-trigger" href="#services">Bemutatkozás</a>
         </li>
         <li class="sidebar-nav-item">
-          <a class="js-scroll-trigger" href="#portfolio">Portfolio</a>
-        </li>
-        <li class="sidebar-nav-item">
-          <a class="js-scroll-trigger" href="#contact">Contact</a>
+          <a class="js-scroll-trigger" href="#footer">Elérhetőségek</a>
         </li>
       </ul>
     </nav>
@@ -84,7 +72,8 @@ $server = mysqli_connect($hostDB,$userDB,$passDB,$tableDB);
             color: #fff;
           }
         </style>
-        <h1 class="mb-1 wh sdw">PT Makeup</h1>
+        <!-- <h1 class="mb-1 wh sdw">PT Makeup</h1> -->
+        <h1 class="mb-1">PT Makeup</h1>
         <h3 class="mb-5 wh">
           <em class="sdw">Because we actually know how to do stuff</em>
         </h3>
@@ -139,7 +128,7 @@ $server = mysqli_connect($hostDB,$userDB,$passDB,$tableDB);
                 <p class="mb-0"></p>
               </span>
             </span>
-            <img class="img-fluid" src="assets/uploads/petra.jpg" alt="" height="50%">
+            <img class="img-fluid" src="assets/uploads/petra.jpg" alt="">
           </a>
         </div>
       </div>
@@ -153,6 +142,8 @@ $server = mysqli_connect($hostDB,$userDB,$passDB,$tableDB);
     -->
 
     <!-- Footer -->
+    <section id="footer">
+
     <footer class="footer text-center">
       <div class="container" align="left">
         <h4>Árlista:</h4>
@@ -190,14 +181,28 @@ $server = mysqli_connect($hostDB,$userDB,$passDB,$tableDB);
     <a class="scroll-to-top rounded js-scroll-trigger" href="#page-top">
       <i class="fa fa-angle-up"></i>
     </a>
+  </section>
+
 
 
     <script type="text/javascript">
         $(document).on('click', '[data-toggle="lightbox"]', function(event) {
+
           event.preventDefault();
           $(this).ekkoLightbox();
         });
     </script>
   </body>
+  <!-- Bootstrap core JavaScript -->
+  <!-- <script src="vendor/jquery/jquery.min.js"></script> -->
+  <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+  <!-- Plugin JavaScript -->
+  <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+
+  <!-- Custom scripts for this template -->
+  <script src="js/stylish-portfolio.min.js"></script>
+
+
 
 </html>

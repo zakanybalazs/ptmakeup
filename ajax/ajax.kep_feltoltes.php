@@ -19,6 +19,7 @@ $dir2 = explode('ajax',$dir);
 $json = array("ok");
 // kép feltöltése a szerverre
 // $pat = "c:/xampp/htdocs/ptmakeup/".$pat;
+$temp_name = $_FILES['kep']['tmp_name'];
  chmod($_FILES['kep']['tmp_name'], 0755);
 rename($_FILES['kep']['tmp_name'],$pat);
 
@@ -27,5 +28,5 @@ rename($_FILES['kep']['tmp_name'],$pat);
   $json = array($server->error);
  }
 header("Content-Type: text/json");
-echo json_encode(array( $json ));
+echo json_encode(array( $temp_name ));
  ?>

@@ -24,6 +24,23 @@ $server = mysqli_connect($hostDB,$userDB,$passDB,$tableDB);
     <link rel="stylesheet" href="../assets/css/animate.css">
     <link rel="stylesheet" href="../assets/css/pnotify.custom.css">
 
+    <!-- Bootstrap core JavaScript -->
+    <script src="../vendor/jquery/jquery.min.js"></script>
+    <script src="../vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Plugin JavaScript -->
+    <script src="../vendor/jquery-easing/jquery.easing.min.js"></script>
+
+    <!-- Custom scripts for this template -->
+    <script src="../js/stylish-portfolio.min.js"></script>
+    <script src="../assets/js/pnotify.custom.js" charset="utf-8"></script>
+    <script src="../assets/js/pnotify.custom.js" charset="utf-8"></script>
+    <script src="../assets/js/scrollTo.min.js" charset="utf-8"></script>
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/ekko-lightbox/5.2.0/ekko-lightbox.min.js" charset="utf-8"></script>
+
+
     <!-- Custom CSS -->
     <link href="../css/stylish-portfolio.min.css" rel="stylesheet">
 
@@ -89,7 +106,7 @@ $server = mysqli_connect($hostDB,$userDB,$passDB,$tableDB);
           <td class="name"><?php echo $name; ?></td>
           <td class="cat"><?php echo $cat; ?></td>
           <td class="leiras" align="center"><?php echo $leiras; ?></td>
-          <td><a class="btn btn-primary" target="_blank" href="../<?php echo $pat; ?>"><i class="fa fa-eye" aria-hidden="true"></a></td>
+          <td><a class="btn btn-primary" target="_blank" data-toggle="lightbox" href="<?php echo $pat; ?>"><i class="fa fa-eye" aria-hidden="true"></a></td>
           <td><button type="button" onclick="edit('photo','<?php echo $photo_id; ?>')" class="btn btn-warning"><i class="fa fa-pencil" aria-hidden="true"></button></td>
           <td><button type="button" onclick="torol('<?php echo $photo_id; ?>','photo','photo_id')" class="btn btn-danger"><i class="fa fa-trash" aria-hidden="true"></i></button></td>
         </tr>
@@ -177,7 +194,7 @@ function feltolt() {
         var KepFile = new FormData();
 
         // creating path
-        var kephely = "../assets/uploads/kepek/" + id + ".jpg";
+        var kephely = "assets/uploads/kepek/" + id + ".jpg";
 
         // Kép hozzáadás a form data-hoz
         KepFile.append('kep', $('#new_photo').prop('files')[0]); //
@@ -418,18 +435,12 @@ function feltolt() {
   });
   }
 </script>
+<script type="text/javascript">
+    $(document).on('click', '[data-toggle="lightbox"]', function(event) {
+      event.preventDefault();
+      $(this).ekkoLightbox();
+    });
+</script>
   </body>
-  <!-- Bootstrap core JavaScript -->
-  <script src="../vendor/jquery/jquery.min.js"></script>
-  <script src="../vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-
-  <!-- Plugin JavaScript -->
-  <script src="../vendor/jquery-easing/jquery.easing.min.js"></script>
-
-  <!-- Custom scripts for this template -->
-  <script src="../js/stylish-portfolio.min.js"></script>
-  <script src="../assets/js/pnotify.custom.js" charset="utf-8"></script>
-  <script src="../assets/js/pnotify.custom.js" charset="utf-8"></script>
-  <script src="../assets/js/scrollTo.min.js" charset="utf-8"></script>
 
 </html>
