@@ -15,7 +15,7 @@ $q = "INSERT INTO photo (name, leiras, pat, cat) VALUES ('{$name}', '{$leiras}',
 
 $dir = getcwd();
 $dir2 = explode('ajax',$dir);
-$pat = $dir2[0].$pat;
+// $pat = $dir2[0].$pat;
 $json = array("ok");
 // kép feltöltése a szerverre
 // $pat = "c:/xampp/htdocs/ptmakeup/".$pat;

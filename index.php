@@ -21,8 +21,24 @@ $server = mysqli_connect($hostDB,$userDB,$passDB,$tableDB);
     <link href="vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
     <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700,300italic,400italic,700italic" rel="stylesheet" type="text/css">
     <link href="vendor/simple-line-icons/css/simple-line-icons.css" rel="stylesheet">
+    <link rel="shortcut icon" type="image/x-icon" href="assets/uploads/tp_icon.png" />
     <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+
+    <!-- Bootstrap core JavaScript -->
+    <script src="vendor/jquery/jquery.min.js"></script>
+    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Plugin JavaScript -->
+    <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+
+    <!-- Custom scripts for this template -->
+    <script src="js/stylish-portfolio.min.js"></script>
+
+
     <script src="btn_ready.js" charset="utf-8"></script>
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/ekko-lightbox/5.2.0/ekko-lightbox.min.js" charset="utf-8"></script>
 
 
     <!-- Custom CSS -->
@@ -102,152 +118,71 @@ $server = mysqli_connect($hostDB,$userDB,$passDB,$tableDB);
       </div>
     </section>
 
+
+
     <!-- Services -->
     <section class="content-section bg-primary text-white text-center" id="services">
       <div class="container">
         <div class="content-section-heading">
-          <h3 class="text-secondary mb-0">Services</h3>
-          <h2 class="mb-5">What We Offer</h2>
+          <h3 class="text-secondary mb-0">Bemutatkozás</h3>
+          <h2 class="mb-5">Takács Petra Annamária</h2>
+        </div>
+        <div class="container">
+          <p>Egészen kis korom óta érdekelt minden, ami a "női kenceficék" világához köthető, ám a sminkes diplomámat csak nemrég szereztem meg a Glamour Makeup Academy kiváló képzésén. Célom nem csak az, hogy gyönyörű sminkek készítésével hozzájáruljak egy-egy különleges alkalom fényéhez, hanem, hogy személyre szabott tanácsadásaimmal megmutassam, hogy a bőrápolás, a smink és saját pozitív tulajdonságainak kiemelése nem bűnös dolog, sőt mi több, nagyban hozzájárul önbizalmunk növeléséhez. Hiszem, hogy minden nőben van valami szép!</p>
         </div>
         <div class="row">
-          <div class="col-lg-3 col-md-6 mb-5 mb-lg-0">
-            <span class="service-icon rounded-circle mx-auto mb-3">
-              <i class="icon-screen-smartphone"></i>
+          <div class="col-lg-3 col-md-2 col-sm-1"> </div>
+          <div class="col-lg-6 col-md-8 col-sm-10">
+          <a class="portfolio-item" data-toggle="lightbox" href="assets/uploads/petra.jpg">
+            <span class="caption">
+              <span class="caption-content">
+                <p class="mb-0"></p>
+              </span>
             </span>
-            <h4>
-              <strong>Responsive</strong>
-            </h4>
-            <p class="text-faded mb-0">Looks great on any screen size!</p>
-          </div>
-          <div class="col-lg-3 col-md-6 mb-5 mb-lg-0">
-            <span class="service-icon rounded-circle mx-auto mb-3">
-              <i class="icon-pencil"></i>
-            </span>
-            <h4>
-              <strong>Redesigned</strong>
-            </h4>
-            <p class="text-faded mb-0">Freshly redesigned for Bootstrap 4.</p>
-          </div>
-          <div class="col-lg-3 col-md-6 mb-5 mb-md-0">
-            <span class="service-icon rounded-circle mx-auto mb-3">
-              <i class="icon-like"></i>
-            </span>
-            <h4>
-              <strong>Favorited</strong>
-            </h4>
-            <p class="text-faded mb-0">Millions of users
-              <i class="fa fa-heart"></i>
-              Start Bootstrap!</p>
-          </div>
-          <div class="col-lg-3 col-md-6">
-            <span class="service-icon rounded-circle mx-auto mb-3">
-              <i class="icon-mustache"></i>
-            </span>
-            <h4>
-              <strong>Question</strong>
-            </h4>
-            <p class="text-faded mb-0">I mustache you a question...</p>
-          </div>
+            <img class="img-fluid" src="assets/uploads/petra.jpg" alt="" height="50%">
+          </a>
         </div>
+      </div>
       </div>
     </section>
 
 
-    <!-- Portfolio -->
-    <section class="content-section" id="portfolio">
-      <div class="container">
-        <div class="content-section-heading text-center">
-          <h3 class="text-secondary mb-0">Portfolio</h3>
-          <h2 class="mb-5">Recent Projects</h2>
-        </div>
-        <div class="row no-gutters">
-          <div class="col-lg-6">
-            <a class="portfolio-item" href="#">
-              <span class="caption">
-                <span class="caption-content">
-                  <h2>Stationary</h2>
-                  <p class="mb-0">A yellow pencil with envelopes on a clean, blue backdrop!</p>
-                </span>
-              </span>
-              <img class="img-fluid" src="img/portfolio-1.jpg" alt="">
-            </a>
-          </div>
-          <div class="col-lg-6">
-            <a class="portfolio-item" href="#">
-              <span class="caption">
-                <span class="caption-content">
-                  <h2>Ice Cream</h2>
-                  <p class="mb-0">A dark blue background with a colored pencil, a clip, and a tiny ice cream cone!</p>
-                </span>
-              </span>
-              <img class="img-fluid" src="img/portfolio-2.jpg" alt="">
-            </a>
-          </div>
-          <div class="col-lg-6">
-            <a class="portfolio-item" href="#">
-              <span class="caption">
-                <span class="caption-content">
-                  <h2>Strawberries</h2>
-                  <p class="mb-0">Strawberries are such a tasty snack, especially with a little sugar on top!</p>
-                </span>
-              </span>
-              <img class="img-fluid" src="img/portfolio-3.jpg" alt="">
-            </a>
-          </div>
-          <div class="col-lg-6">
-            <a class="portfolio-item" href="#">
-              <span class="caption">
-                <span class="caption-content">
-                  <h2>Workspace</h2>
-                  <p class="mb-0">A yellow workspace with some scissors, pencils, and other objects.</p>
-                </span>
-              </span>
-              <img class="img-fluid" src="img/portfolio-4.jpg" alt="">
-            </a>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Call to Action -->
-    <section class="content-section bg-primary text-white">
-      <div class="container text-center">
-        <h2 class="mb-4">The buttons below are impossible to resist...</h2>
-        <a href="#" class="btn btn-xl btn-light mr-4">Click Me!</a>
-        <a href="#" class="btn btn-xl btn-dark">Look at Me!</a>
-      </div>
-    </section>
-
-    <!-- Map -->
-    <section id="contact" class="map">
-      <iframe width="100%" height="100%" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://maps.google.com/maps?f=q&amp;source=s_q&amp;hl=en&amp;geocode=&amp;q=Twitter,+Inc.,+Market+Street,+San+Francisco,+CA&amp;aq=0&amp;oq=twitter&amp;sll=28.659344,-81.187888&amp;sspn=0.128789,0.264187&amp;ie=UTF8&amp;hq=Twitter,+Inc.,+Market+Street,+San+Francisco,+CA&amp;t=m&amp;z=15&amp;iwloc=A&amp;output=embed"></iframe>
-      <br/>
-      <small>
-        <a href="https://maps.google.com/maps?f=q&amp;source=embed&amp;hl=en&amp;geocode=&amp;q=Twitter,+Inc.,+Market+Street,+San+Francisco,+CA&amp;aq=0&amp;oq=twitter&amp;sll=28.659344,-81.187888&amp;sspn=0.128789,0.264187&amp;ie=UTF8&amp;hq=Twitter,+Inc.,+Market+Street,+San+Francisco,+CA&amp;t=m&amp;z=15&amp;iwloc=A"></a>
-      </small>
-    </section>
+    <!-- - Kapcsolat: ide a telefonszám (+36 20 551 7754) és az emasil kerüljön cs (tpmakeup.smink@gmail.com), illetve a facebook (https://www.facebook.com/TakacsPetraSmink/) illetve az instagram olalam (https://www.instagram.com/petra.takacs/)
+    Cím nem kell!
+    A facebook oldalamra és az instagarmomra is lehessen linkként rákattintani.
+    -->
 
     <!-- Footer -->
     <footer class="footer text-center">
+      <div class="container" align="left">
+        <h4>Árlista:</h4>
+        <?php
+        $q = "SELECT * FROM arlista";
+        $sq = mysqli_query($server, $q);
+        while ($sqa = mysqli_fetch_assoc($sq)) {
+        ?>
+        <p><?php echo $sqa['megnevezes'] ?>: <?php echo $sqa['ar'] ?></p>
+          <?php
+        }
+         ?>
+      </div>
       <div class="container">
+        <p>Telefon: +36 20 551 7754</p>
+        <p>Email: tpmakeup.smink@gmail.com</p>
         <ul class="list-inline mb-5">
           <li class="list-inline-item">
-            <a class="social-link rounded-circle text-white mr-3" href="#">
+            <a class="social-link rounded-circle text-white mr-3" href="https://www.facebook.com/TakacsPetraSmink/">
               <i class="icon-social-facebook"></i>
             </a>
           </li>
           <li class="list-inline-item">
-            <a class="social-link rounded-circle text-white mr-3" href="#">
-              <i class="icon-social-twitter"></i>
-            </a>
-          </li>
-          <li class="list-inline-item">
-            <a class="social-link rounded-circle text-white" href="#">
-              <i class="icon-social-github"></i>
+            <a class="social-link rounded-circle text-white mr-3" href="https://www.instagram.com/_tp_makeup_/">
+              <i class="icon-social-instagram"></i>
             </a>
           </li>
         </ul>
-        <p class="text-muted small mb-0">Copyright &copy; Your Website 2017</p>
+
+        <p class="text-muted small mb-0">Copyright &copy; <h4><a href="https://www.facebook.com/balazs.zakany"><span style="color:#f442f4">Z</span><span style="color:#30ff75">K</span><span style="color:#82fff2">N</span><span style="color:#f7ffbf">Y</span></a></h4></p>
       </div>
     </footer>
 
@@ -256,16 +191,13 @@ $server = mysqli_connect($hostDB,$userDB,$passDB,$tableDB);
       <i class="fa fa-angle-up"></i>
     </a>
 
-    <!-- Bootstrap core JavaScript -->
-    <script src="vendor/jquery/jquery.min.js"></script>
-    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
-    <!-- Plugin JavaScript -->
-    <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
-
-    <!-- Custom scripts for this template -->
-    <script src="js/stylish-portfolio.min.js"></script>
-
+    <script type="text/javascript">
+        $(document).on('click', '[data-toggle="lightbox"]', function(event) {
+          event.preventDefault();
+          $(this).ekkoLightbox();
+        });
+    </script>
   </body>
 
 </html>

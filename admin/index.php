@@ -177,7 +177,7 @@ function feltolt() {
         var KepFile = new FormData();
 
         // creating path
-        var kephely = "assets/uploads/kepek/" + id + ".jpg";
+        var kephely = "../assets/uploads/kepek/" + id + ".jpg";
 
         // Kép hozzáadás a form data-hoz
         KepFile.append('kep', $('#new_photo').prop('files')[0]); //
@@ -269,7 +269,7 @@ function feltolt() {
       <div class="col-lg-12">
         <p></p>
           <button type="button" class="btn btn-success" name="button" onclick="new_cat()"><i class="fa fa-floppy-o" aria-hidden="true"></i> Mentés</button>
-          <script type="text/javascript">
+        <script type="text/javascript">
           $(document).ready(function(){
               $('[data-toggle="tooltip"]').tooltip();
           });
@@ -321,42 +321,103 @@ function feltolt() {
             <?php } ?>
           </tbody>
         </table>
-        <script type="text/javascript">
-          function torol(id,table,id_name) {
-            $.post("../ajax/ajax.delete.php", {
-                table: table,
-                id_name: id_name,
-                id: id
-              },
-              "json").done(function( response ) {
-                if (response == "ok") {
-                  new PNotify({
-                    title: 'Siker',
-                    text: 'Sikeresen Töröltem! Frissíts a változtatások mutatásához.',
-                    animate: { animate: true, in_class: 'bounceInLeft',
-                    out_class: 'bounceOutRight',},
-                    type: "success",
-                    hide: true,
-                  });
-                } else {
-            new PNotify({
-              title: 'Sikertelen tölrés',
-              text: 'Sikertelen volt a törlés! Hiba: '+response,
-              animate: { animate: true, in_class: 'bounceInLeft',
-              out_class: 'bounceOutRight',},
-              type: "error",
-              hide: true,
-            });
-          }
 
-        });
-
-          }
-        </script>
       </div>
     </div>
   </div>
+  <div class="container">
+    <h3>Árlista:</h3>
+    <div class="row">
+      <div class="col-lg-4 col-md-4 col-sm-6">
+        <label>Listaelem megnevezése</label>
+        <input type="text" id="ar_megnevezes" class="form-control">
+      </div>
+      <div class="col-lg-4 col-md-4 col-sm-6">
+        <label>Listaelem ára</label>
+        <input type="text" id="ar_ar" class="form-control">
+      </div>
+      <div class="col-lg-4 col-md-4 col-sm-6">
+        <label>Adatok elmentése</label>
+        <button type="button" class="btn btn-success form-control" onclick="ar_ment()">Mentés</button>
+      </div>
+      <script type="text/javascript">
+        function ar_ment() {
+          var megn = $('#ar_megnevezes').val();
+          var ar = $('#ar_ar').val();
+          var array = new Array({'megnevezes': megn, 'ar':ar});
+          $.post("../ajax/ajax.insert.php", {
+              Ptable: 'arlista',
+              data: array,
+            },
+            "json").done(function( response ) {
+              if (response == "ok") {
+                new PNotify({
+                  title: 'Siker',
+                  text: 'Sikeresen megtörtént a feltöltés!  Frissíts a változtatások mutatásához.',
+                  animate: { animate: true, in_class: 'bounceInLeft',
+                  out_class: 'bounceOutRight',},
+                  type: "success",
+                  hide: true,
+                });
+              }
+            });
+        }
+      </script>
+    </div>
+    <table class="table table-striped table-hover">
+      <thead>
+        <th>Megnevezés</th>
+        <th>Ár</th>
+        <th>Törlés</th>
+      </thead>
+      <tbody>
+        <?php
+        $w = "SELECT * FROM arlista";
+        $sw = mysqli_query($server, $w);
+        while ($swa = mysqli_fetch_assoc($sw)) {
+          $id = $swa['ar_id'];
+         ?>
+         <tr id="ar_<?php echo $id ?>">
+           <td class="megvevezes"><?php echo $swa['megnevezes'] ?></td>
+           <td class="ar" align="center"><?php echo $swa['ar'] ?></td>
+           <td><button type="button" class="btn btn-danger form-control" name="button" onclick="torol('<?php echo $id ?>','arlista','ar_id')"><i class="fa fa-trash" aria-hidden="true"></i> Törlés</button></td>
+         </tr>
+        <?php } ?>
+      </tbody>
+    </table>
+  </div>
 </div>
+<script type="text/javascript">
+  function torol(id,table,id_name) {
+    $.post("../ajax/ajax.delete.php", {
+        table: table,
+        id_name: id_name,
+        id: id
+      },
+      "json").done(function( response ) {
+        if (response == "ok") {
+          new PNotify({
+            title: 'Siker',
+            text: 'Sikeresen Töröltem! Frissíts a változtatások mutatásához.',
+            animate: { animate: true, in_class: 'bounceInLeft',
+            out_class: 'bounceOutRight',},
+            type: "success",
+            hide: true,
+          });
+        } else {
+    new PNotify({
+      title: 'Sikertelen tölrés',
+      text: 'Sikertelen volt a törlés! Hiba: '+response,
+      animate: { animate: true, in_class: 'bounceInLeft',
+      out_class: 'bounceOutRight',},
+      type: "error",
+      hide: true,
+    });
+  }
+
+  });
+  }
+</script>
   </body>
   <!-- Bootstrap core JavaScript -->
   <script src="../vendor/jquery/jquery.min.js"></script>
