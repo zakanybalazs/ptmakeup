@@ -1,6 +1,6 @@
 <?php
 $hostDB = "localhost";
-$userDB = "ptmakeup";
+$userDB = "tpmakeup";
 $passDB = "AQ1sw2de3";
-$tableDB = "ptmakeup";
+$tableDB = "tpmakeup";
  ?>
