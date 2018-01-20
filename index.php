@@ -22,6 +22,7 @@ $server = mysqli_connect($hostDB,$userDB,$passDB,$tableDB);
     <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700,300italic,400italic,700italic" rel="stylesheet" type="text/css">
     <link href="vendor/simple-line-icons/css/simple-line-icons.css" rel="stylesheet">
     <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <script src="btn_ready.js" charset="utf-8"></script>
 
 
     <!-- Custom CSS -->
@@ -94,22 +95,9 @@ $server = mysqli_connect($hostDB,$userDB,$passDB,$tableDB);
           </div>
           <script type="text/javascript">
             $(document).ready(function() {
-              $('#color_btn').children('a').each(function () {
-                var color = getRandomColor();
-                $(this).css('background-color',color);
-                $(this).css('border-color',color);
-                $(this).css('box-shadow',"0 8px 6px -6px black");
-              });
+              btn_color();
             });
-            function getRandomColor() {
-                var letters = '0123456789ABCDEF';
-                var color = '#';
-                for (var i = 0; i < 6; i++) {
-                  color += letters[Math.floor(Math.random() * 16)];
-                }
-                return color;
-              }
-          </script>
+            </script>
         </div>
       </div>
     </section>
