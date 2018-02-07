@@ -72,8 +72,9 @@ $server = mysqli_connect($hostDB,$userDB,$passDB,$tableDB);
             $sq = mysqli_query($server, $q);
             while ($sqa = mysqli_fetch_assoc($sq)) {
               $id = $sqa['cat_id'];
+              $color = $sqa['color'];
              ?>
-            <a class="btn btn-dark btn-xl" href="galeries.php?cat=<?php echo $id ?>"><span class="sdw"><?php echo $sqa['name'] ?></span></a>
+            <a class="btn btn-dark btn-xl" placeholder="<?php echo $color ?>" href="galeries.php?cat=<?php echo $id ?>"><span class="sdw"><?php echo $sqa['name'] ?></span></a>
           <?php } ?>
           </div>
           <script type="text/javascript">
@@ -91,6 +92,7 @@ $server = mysqli_connect($hostDB,$userDB,$passDB,$tableDB);
     $sq = mysqli_query($server, $q);
     while ($sqa = mysqli_fetch_assoc($sq)) {
       $cat_name = $sqa['name'];
+      $cal_leiras = $sqa['leiras'];
     }
      ?>
 
@@ -100,6 +102,7 @@ $server = mysqli_connect($hostDB,$userDB,$passDB,$tableDB);
         <div class="content-section-heading text-center">
           <h3 class="text-primary mb-0">Portfolio</h3>
           <h2 class="mb-5"><?php echo $cat_name ?></h2>
+          <p align="center"><?php echo $cal_leiras ?></p>
         </div>
         <div class="row no-gutters">
         <?php

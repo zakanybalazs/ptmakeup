@@ -73,7 +73,7 @@ $server = mysqli_connect($hostDB,$userDB,$passDB,$tableDB);
           }
         </style>
         <!-- <h1 class="mb-1 wh sdw">PT Makeup</h1> -->
-        <h1 class="mb-1">PT Makeup</h1>
+        <h1 class="mb-1">TP Makeup</h1>
         <h3 class="mb-5 wh">
           <em class="sdw">Because we actually know how to do stuff</em>
         </h3>
@@ -94,8 +94,9 @@ $server = mysqli_connect($hostDB,$userDB,$passDB,$tableDB);
             $sq = mysqli_query($server, $q);
             while ($sqa = mysqli_fetch_assoc($sq)) {
               $id = $sqa['cat_id'];
+              $color = $sqa['color'];
              ?>
-            <a class="btn btn-dark btn-xl" href="galeries.php?cat=<?php echo $id ?>"><span class="sdw"><?php echo $sqa['name'] ?></span></a>
+            <a class="btn btn-dark btn-xl" placeholder="<?php echo $color ?>" href="galeries.php?cat=<?php echo $id ?>"><span class="sdw"><?php echo $sqa['name'] ?></span></a>
           <?php } ?>
           </div>
           <script type="text/javascript">
